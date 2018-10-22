@@ -1,4 +1,10 @@
+int sides;
+int roll;
+
 void setup(){
+  size(500,500);
+  background(255);
+  smooth();
   //no loop means that draw is only called once
   //OR if you ever call redraw()
   noLoop();
@@ -20,6 +26,7 @@ void mousePressed(){
 //Each instance should randomly assign itself a value from 1 to 6
 class Die {
 	//variable declarations for your Die instances here
+  int sides = 6;
 	
 	//constructor
 	Die(int x, int y){
@@ -28,6 +35,7 @@ class Die {
 	
 	//Simulate a roll of a die
 	void roll(){
+    int roll = (int)(Math.random() * sides) + 1;
 		//your code here, 
 		//should randomly assign a value from 1 to 6
 	}
