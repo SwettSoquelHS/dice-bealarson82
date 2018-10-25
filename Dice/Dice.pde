@@ -1,5 +1,4 @@
-int sides;
-int roll;
+//initialize variables for reference
 Die Die1;
 Die Die2;
 Die Die3;
@@ -9,7 +8,10 @@ Die Die6;
 Die Die7;
 Die Die8;
 Die Die9;
+color bColor;
+int counter;
 
+//give positions for objects
 void setup(){
   size(500,500);
   smooth();
@@ -27,11 +29,11 @@ void setup(){
   
   noLoop();
 }
-
 void draw(){
-  //your code here
-  background(#5A28A0);
+  //call objects to appear
+  background(bColor);
   smooth();
+ 
   Die1.show();
   Die2.show();
   Die3.show();
@@ -42,56 +44,81 @@ void draw(){
   Die7.show();
   Die8.show();
   Die9.show();
+  textSize(20);
+  text("Total number of dots: " + counter, 50,50);
+  
 }
 
 void mousePressed(){
-  //No real work for you to do here
-  //calling redraw will do the necessary work 
-  //to redraw your processing script
+  bColor = color(random(255), random(255), random(255));
   redraw();
 }
 
-
-//Dice: Models a single 6 sided dice cube
-//Each instance should randomly assign itself a value from 1 to 6
 class Die {
+  int rollDice;
   int x_pos;
   int y_pos;
-	//variable declarations for your Die instances here
-  int sides = 6;
 	
-	//constructor
 	Die(int x, int y){
     x_pos = x;
     y_pos = y;
-  
-	}
 
+	}
 	void roll(){
-    int roll = (int)((Math.random() * sides) + 1);
-    //dots
-    if(roll == 1 || roll == 2 || roll == 3 || roll == 4 || roll == 5 || roll == 6){
-      fill(0);
-      ellipse(50,50,3,3);  
-    }
-    
-		//your code here, 
-		//should randomly assign a value from 1 to 6
+    rollDice = (int)((Math.random() * 6) + 1);
 	}
 	
-	/*
-	  Use the randomly assigned roll value to draw the face of a die
-	*/
 	void show(){ 
-    pushMatrix();
-    translate(x_pos, y_pos);
-    boolean one = true;
     fill(255);
+    pushMatrix();
+    translate(x_pos,y_pos);
     rect(50,50,90,90,20);
-    if(one){
+    roll();
+  
+  //dots 
+    //middle
+    if(rollDice == 1 || rollDice == 3 || rollDice == 5){
       fill(0);
-      ellipse(50,50,25,25);
+      ellipse(95,95,10,10);
     }
+    //top left
+    if(rollDice == 2 || rollDice == 3 || rollDice == 4 || rollDice == 5 || rollDice == 6){
+      fill(0);
+      ellipse(70,70,10,10);
+    }
+    //bottom right
+    if(rollDice == 2 || rollDice == 3 || rollDice == 4 || rollDice == 5 || rollDice == 6){
+      fill(0);
+      ellipse(120,120,10,10);
+    }
+    //bottom left
+    if(rollDice == 4 || rollDice == 5 || rollDice == 6){
+      fill(0);
+      ellipse(70,120,10,10);
+    }
+    //top right
+    if(rollDice == 4 || rollDice == 5 || rollDice == 6){
+      fill(0);
+      ellipse(120,70,10,10);
+    }
+    //middles on six
+    if(rollDice == 6){
+      fill(0);
+      ellipse(70,95,10,10);
+      ellipse(120,95,10,10);
+    }
+    if(rollDice == 1)
+      counter = counter + 1;
+    if(rollDice == 2)
+      counter = counter + 2;
+    if(rollDice == 3)
+      counter = counter + 3;
+    if(rollDice == 4)
+      counter = counter + 4;
+    if(rollDice == 5)
+      counter = counter + 5;
+    if(rollDice == 6)
+      counter = counter + 6;
  
     popMatrix();
   }
