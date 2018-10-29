@@ -50,8 +50,18 @@ void draw(){
 }
 
 void mousePressed(){
-  bColor = color(random(255), random(255), random(255));
+  counter = 0;
   redraw();
+  Die1.roll();
+  Die2.roll();
+  Die3.roll();
+  Die4.roll();
+  Die5.roll();
+  Die6.roll();
+  Die7.roll();
+  Die8.roll();
+  Die9.roll();
+  bColor = color(random(255), random(255), random(255));
 }
 
 class Die {
@@ -73,7 +83,6 @@ class Die {
     pushMatrix();
     translate(x_pos,y_pos);
     rect(50,50,90,90,20);
-    roll();
   
   //dots 
     //middle
